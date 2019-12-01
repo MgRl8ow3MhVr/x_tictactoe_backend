@@ -18,7 +18,11 @@ wss.on("connection", connection => {
   connection.on("message", message => {
     // parse message
     message = JSON.parse(message);
-    console.log(message);
+    if (message.object) {
+      console.log(message);
+    } else {
+      console.log(message.username);
+    }
     switch (message.object) {
       case "enterArena":
         playersList[message.username] = connection;
@@ -42,11 +46,12 @@ wss.on("connection", connection => {
         break;
 
       default:
-        wss.clients.forEach(client => {
-          if (client !== connection && client.readyState === WebSocket.OPEN) {
-            client.send(JSON.stringify(message));
-          }
-        });
+        // wss.clients.forEach(client => {
+        //   if (client !== connection && client.readyState === WebSocket.OPEN) {
+        //     client.send(JSON.stringify(message));
+        //   }
+        // });
+        playersList[message.opponent].send(JSON.stringify(message));
         break;
     }
   });
