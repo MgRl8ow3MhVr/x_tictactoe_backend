@@ -1,7 +1,11 @@
 const express = require("express");
 const http = require("http");
 const WebSocket = require("ws");
+const cors = require("cors");
+
 const app = express();
+app.use(cors());
+
 app.get("/", (req, res) => {
   res.json({ msg: "Hello World" });
 });
