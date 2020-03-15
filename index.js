@@ -58,7 +58,7 @@ wss.on('connection', connection => {
       case 'challenge':
         console.log(message.challenger, message.opponent)
         playersList[message.opponent].send(
-          JSON.stringify({ object: 'challenged', by: message.challenger })
+          JSON.stringify({ ...message, object: 'challenged' })
         )
         break
 
