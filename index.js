@@ -89,4 +89,5 @@ wss.on("connection", (connection) => {
 
 server.listen(process.env.PORT || 8080, () => {
   console.log("Server started on port 8080");
+  console.log("hello");
 });
